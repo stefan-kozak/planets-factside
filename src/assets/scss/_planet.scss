@@ -45,12 +45,15 @@
    transition: 0.3s ease;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-   transition: opacity 0.3s ease;
-}
+// TABLET
+@media only screen and (min-width: 768px) {
+   .planet-main {
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 2%;
 
-.fade-enter-from,
-.fade-leave-to {
-   opacity: 0;
+      .planet-images {
+         margin-left: 0;
+      }
+   }
 }

@@ -1,31 +1,32 @@
 <template>
    <section v-cloak class="main-text">
-      <transition appear name="fade">
-         <h1>{{ planetText.name }}</h1>
-      </transition>
+      <div class="main-text-content">
+         <transition appear name="fade">
+            <h1>{{ planetText.name }}</h1>
+         </transition>
 
-      <transition appear name="fade">
-         <p>{{ activeText }}</p>
-      </transition>
-      <div>
-         <p>Source:</p>
-         <a target="_blank" :href="planetText.overview.source"
-            >Wikipedia
-            <svg
-               xmlns="http://www.w3.org/2000/svg"
-               width="16"
-               height="16"
-               fill="currentColor"
-               class="bi bi-arrow-up-right-square-fill"
-               viewBox="0 0 16 16"
-            >
-               <path
-                  d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803 10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z"
-               />
-            </svg>
-         </a>
+         <transition appear name="fade">
+            <p>{{ activeText }}</p>
+         </transition>
+         <div>
+            <p>Source:</p>
+            <a target="_blank" :href="planetText.overview.source"
+               >Wikipedia
+               <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-arrow-up-right-square-fill"
+                  viewBox="0 0 16 16"
+               >
+                  <path
+                     d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803 10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z"
+                  />
+               </svg>
+            </a>
+         </div>
       </div>
-
       <div class="planet-menu">
          <a
             id="planet-overview-link"
@@ -134,6 +135,12 @@ export default {
    margin: 0 5%;
    min-height: 33.44rem;
 
+   .main-text-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+   }
+
    div {
       display: flex;
       flex-direction: row;
@@ -217,13 +224,46 @@ export default {
    }
 }
 
-.fade-enter-active,
-.fade-leave-active {
-   transition: opacity 0.5s ease;
+// *****
+// RESPONSIVE
+// *****
+
+// MOBILE
+@media only screen and (min-width: 320px) {
 }
 
-.fade-enter-from,
-.fade-leave-to {
-   opacity: 0;
+// TABLET
+@media only screen and (min-width: 768px) {
+   .planet-main {
+      flex-direction: column;
+   }
+
+   .main-text {
+      width: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: 0px 14%;
+      min-height: auto;
+
+      .main-text-content {
+         width: 100%;
+         display: flex;
+         flex-direction: column;
+         align-items: flex-start;
+
+         p {
+            width: 100%;
+         }
+      }
+
+      .planet-menu {
+         align-self: center;
+         justify-self: flex-end;
+      }
+   }
+}
+
+// DESKTOP
+@media only screen and (min-width: 1440px) {
 }
 </style>

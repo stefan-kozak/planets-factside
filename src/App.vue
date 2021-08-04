@@ -329,4 +329,10 @@ body {
    visibility: hidden;
    transition: 0.3s ease;
 }
+
+@media only screen and (min-width: 768px) {
+   #app {
+      height: auto;
+   }
+}
 </style>
