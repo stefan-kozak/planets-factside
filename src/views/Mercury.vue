@@ -39,6 +39,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import 'planet';
-</style>
+<style lang="scss" scoped></style>

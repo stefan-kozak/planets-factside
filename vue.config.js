@@ -1,11 +1,13 @@
 // vue.config.js
-
-{
-   {
-      {
-         ;`
-              @import '@/assets/scss/_variables.scss';
-          `
-      }
-   }
+module.exports = {
+   css: {
+      loaderOptions: {
+         sass: {
+            prependData: `
+            @import '@/assets/scss/_planet.scss';
+            @import '@/assets/scss/_variables.scss';
+            `,
+         },
+      },
+   },
 }

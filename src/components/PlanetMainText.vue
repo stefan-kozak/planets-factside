@@ -29,7 +29,10 @@
       <div class="planet-menu">
          <a
             id="planet-overview-link"
-            :class="{ active: activeLink === 'overview' }"
+            :class="[
+               { active: activeLink === 'overview' },
+               activeLink === 'overview' ? planetName : '',
+            ]"
             @click.prevent="showPlanetCurrent('overview', planetText.name)"
             href=""
             ><p>01</p>
@@ -39,7 +42,10 @@
          <a
             id="planet-internal-link"
             href=""
-            :class="{ active: activeLink === 'internal' }"
+            :class="[
+               { active: activeLink === 'internal' },
+               activeLink === 'internal' ? planetName : '',
+            ]"
             @click.prevent="showPlanetCurrent('internal', planetText.name)"
             ><p>02</p>
             <h1>INTERNAL STRUCTURE</h1></a
@@ -47,7 +53,10 @@
 
          <a
             id="planet-geology-link"
-            :class="{ active: activeLink === 'geology' }"
+            :class="[
+               { active: activeLink === 'geology' },
+               activeLink === 'geology' ? planetName : '',
+            ]"
             href=""
             @click.prevent="showPlanetCurrent('geology', planetText.name)"
             ><p>03</p>
@@ -63,6 +72,8 @@ export default {
       return {
          activeLink: 'overview',
          activeText: this.planetText.overview.content,
+         planetName: window.location.hash.slice(2),
+         isActive: true,
       }
    },
    props: ['planetText'],
@@ -180,14 +191,9 @@ export default {
          font-family: 'Spartan', sans-serif;
          transition: 0.3s ease;
 
-         &.active {
-            background-color: #419ebb;
-            border-color: #419ebb;
-         }
-
          &:hover {
             background-color: darken(#fff, 55%);
-            border-color: darken(#fff, 55%);
+            border-color: darken(#fff, 55%) !important;
             transition: 0.3s ease;
          }
       }
