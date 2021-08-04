@@ -2,17 +2,15 @@
    <div class="planet-wrap">
       <div class="planet-main">
          <div class="planet-images">
-            <img
-               id="planet-overview"
-               :src="require('@/assets/' + currentImage)"
-               alt="planet"
-            />
+            <planetImage :planetImage="planet[0].images" />
 
-            <img
-               id="planet-geology"
-               src="../assets/geology-mercury.png"
-               alt="geology"
-            />
+            <transition appear name="fade">
+               <img
+                  id="planet-geology"
+                  src="../assets/geology-mercury.png"
+                  alt="geology"
+               />
+            </transition>
          </div>
 
          <PlanetMainText :planetText="planet[0]" />
@@ -24,16 +22,13 @@
 <script>
 import PlanetMainText from '@/components/PlanetMainText.vue'
 import PlanetInfo from '@/components/PlanetInfo.vue'
+import planetImage from '@/components/planetImage.vue'
 
 export default {
-   data() {
-      return {
-         currentImage: 'planet-mercury.svg',
-      }
-   },
    components: {
       PlanetMainText,
       PlanetInfo,
+      planetImage,
    },
    props: ['planet'],
    methods: {
@@ -45,34 +40,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.planet-wrap {
-   width: 100%;
-   display: flex;
-   margin-top: 1%;
-   flex-direction: column;
-   justify-content: space-between;
-   align-self: center;
-}
-
-.planet-main {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-
-   .planet-images {
-      position: relative;
-      width: 25%;
-      margin-left: 25%;
-      align-self: center;
-
-      #planet-geology {
-         display: none;
-         position: absolute;
-         bottom: 54%;
-         width: 40%;
-         transform: rotate(151deg);
-         right: 61%;
-      }
-   }
-}
+@import 'planet';
 </style>

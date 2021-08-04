@@ -1,7 +1,12 @@
 <template>
-   <section class="main-text">
-      <h1>{{ planetText.name }}</h1>
-      <p>{{ planetText.overview.content }}</p>
+   <section v-cloak class="main-text">
+      <transition appear name="fade">
+         <h1>{{ planetText.name }}</h1>
+      </transition>
+
+      <transition appear name="fade">
+         <p>{{ activeText }}</p>
+      </transition>
       <div>
          <p>Source:</p>
          <a target="_blank" :href="planetText.overview.source"
@@ -24,19 +29,27 @@
       <div class="planet-menu">
          <a
             id="planet-overview-link"
-            class="active"
-            @click.prevent="planetOverview()"
+            :class="{ active: activeLink === 'overview' }"
+            @click.prevent="showPlanetCurrent('overview', planetText.name)"
             href=""
             ><p>01</p>
             <h1>OVERVIEW</h1></a
          >
 
-         <a id="planet-internal-link" href="" @click.prevent="planetInternal()"
+         <a
+            id="planet-internal-link"
+            href=""
+            :class="{ active: activeLink === 'internal' }"
+            @click.prevent="showPlanetCurrent('internal', planetText.name)"
             ><p>02</p>
             <h1>INTERNAL STRUCTURE</h1></a
          >
 
-         <a id="planet-geology-link" href="" @click.prevent="planetGeology()"
+         <a
+            id="planet-geology-link"
+            :class="{ active: activeLink === 'geology' }"
+            href=""
+            @click.prevent="showPlanetCurrent('geology', planetText.name)"
             ><p>03</p>
             <h1>Surface Geology</h1></a
          >
@@ -46,80 +59,56 @@
 
 <script>
 export default {
+   data() {
+      return {
+         activeLink: 'overview',
+         activeText: this.planetText.overview.content,
+      }
+   },
    props: ['planetText'],
    methods: {
-      planetOverview() {
-         // => DECLARING IMAGE FOR CHANGE
-         let planetOverview = document.getElementById('planet-overview')
+      showPlanetCurrent(type, planet) {
+         // COMMENT WHAT
+         const planetGeology = document.getElementById('planet-geology')
+         const planetOverview = document.getElementById('planet-overview')
 
-         // => DECLARING LINKS
-         let planetInternalLink = document.getElementById(
-            'planet-internal-link'
-         )
-         let planetOverviewLink = document.getElementById(
-            'planet-overview-link'
-         )
-         let planetGeologyLink = document.getElementById('planet-geology-link')
+         function changeImage(structure) {
+            planetOverview.classList.add('fade-leave-active', 'fade-leave-to')
 
-         // => CHANGE IMAGE
-         planetOverview.src = require('@/assets/' +
-            this.planetText.images.planet)
+            setTimeout(function changeImageSource() {
+               planetOverview.src = require('../assets/planet-' +
+                  planet.toLowerCase() +
+                  structure +
+                  '.svg')
 
-         // => LINKS REMOVE ACTIVE CLASS
-         planetInternalLink.classList.remove('active')
-         planetGeologyLink.classList.remove('active')
+               planetOverview.classList.remove('fade-leave-to')
+            }, 400)
+         }
 
-         // => ADDING ACTIVE CLASS
-         planetOverviewLink.classList.add('active')
-      },
+         if (type === 'overview') {
+            changeImage('')
 
-      planetInternal() {
-         // => DECLARING IMAGE FOR CHANGE
-         let planetOverview = document.getElementById('planet-overview')
+            this.activeLink = 'overview'
+            this.activeText = this.planetText.overview.content
+         } else {
+            planetGeology.style.opacity = 0
+         }
 
-         // => DECLARING LINKS
-         let planetInternalLink = document.getElementById(
-            'planet-internal-link'
-         )
-         let planetOverviewLink = document.getElementById(
-            'planet-overview-link'
-         )
-         let planetGeologyLink = document.getElementById('planet-geology-link')
+         if (type === 'internal') {
+            changeImage('-internal')
 
-         // => CHANGE IMAGE
-         planetOverview.src = require('@/assets/' +
-            this.planetText.images.internal)
+            this.activeLink = 'internal'
+            this.activeText = this.planetText.structure.content
+         } else {
+            planetGeology.style.opacity = 0
+         }
 
-         // => LINKS REMOVE ACTIVE CLASS
-         planetOverviewLink.classList.remove('active')
-         planetGeologyLink.classList.remove('active')
+         if (type === 'geology') {
+            planetGeology.style.opacity = 1
 
-         // => ADDING ACTIVE CLASS
-         planetInternalLink.classList.add('active')
-      },
-
-      planetGeology() {
-         // => GEOLOGY IMAGE
-         let planetGeology = document.getElementById('planet-geology')
-
-         // => LINKS
-         let planetInternalLink = document.getElementById(
-            'planet-internal-link'
-         )
-         let planetOverviewLink = document.getElementById(
-            'planet-overview-link'
-         )
-         let planetGeologyLink = document.getElementById('planet-geology-link')
-
-         // => LINKS REMOVE ACTIVE CLASS
-         planetOverviewLink.classList.remove('active')
-         planetInternalLink.classList.remove('active')
-
-         // => ADDING ACTIVE CLASS
-         planetGeologyLink.classList.add('active')
-
-         // => PLANET GEOLOGY ACTIVE
-         planetGeology.style.display = 'block'
+            this.activeLink = 'geology'
+            this.activeText = this.planetText.geology.content
+         }
       },
    },
 }
@@ -132,6 +121,7 @@ export default {
    flex-direction: column;
    justify-content: space-between;
    margin: 0 5%;
+   min-height: 33.44rem;
 
    div {
       display: flex;
@@ -143,7 +133,7 @@ export default {
 
    h1 {
       margin: 0;
-      font-size: 5em;
+      font-size: 4rem;
       color: #fff;
       width: min-content;
       font-family: 'Antonio', sans-serif;
@@ -196,8 +186,8 @@ export default {
          }
 
          &:hover {
-            background-color: #419ebb;
-            border-color: #419ebb;
+            background-color: darken(#fff, 55%);
+            border-color: darken(#fff, 55%);
             transition: 0.3s ease;
          }
       }
@@ -219,5 +209,15 @@ export default {
          font-family: 'Spartan', sans-serif;
       }
    }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+   transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+   opacity: 0;
 }
 </style>

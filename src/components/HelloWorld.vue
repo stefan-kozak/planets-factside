@@ -1,5 +1,5 @@
 <template>
-   <h1>HelloWorld</h1>
+   <h1>THE PLANETS</h1>
 </template>
 
 <script>

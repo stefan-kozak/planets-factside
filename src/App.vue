@@ -1,5 +1,5 @@
 <template>
-   <div id="nav">
+   <div v-cloak id="nav">
       <div class="nav-name"><router-link to="/">THE PLANETS</router-link></div>
       <div class="nav-planets">
          <router-link to="/mercury">{{ planets[0].name }}</router-link>
@@ -72,9 +72,9 @@ export default {
                radius: '6,051.8 KM',
                temperature: '471°c',
                images: {
-                  planet: './assets/planet-venus.svg',
-                  internal: './assets/planet-venus-internal.svg',
-                  geology: './assets/geology-venus.png',
+                  planet: 'planet-venus.svg',
+                  internal: 'planet-venus-internal.svg',
+                  geology: 'geology-venus.png',
                },
             },
             {
@@ -100,9 +100,9 @@ export default {
                radius: '6,371 KM',
                temperature: '16°c',
                images: {
-                  planet: './assets/planet-earth.svg',
-                  internal: './assets/planet-earth-internal.svg',
-                  geology: './assets/geology-earth.png',
+                  planet: 'planet-earth.svg',
+                  internal: 'planet-earth-internal.svg',
+                  geology: 'geology-earth.png',
                },
             },
             {
@@ -128,9 +128,9 @@ export default {
                radius: '3,389.5 KM',
                temperature: '-28°c',
                images: {
-                  planet: './assets/planet-mars.svg',
-                  internal: './assets/planet-mars-internal.svg',
-                  geology: './assets/geology-mars.png',
+                  planet: 'planet-mars.svg',
+                  internal: 'planet-mars-internal.svg',
+                  geology: 'geology-mars.png',
                },
             },
             {
@@ -157,9 +157,9 @@ export default {
                radius: '69,911 KM',
                temperature: '-108°c',
                images: {
-                  planet: './assets/planet-jupiter.svg',
-                  internal: './assets/planet-jupiter-internal.svg',
-                  geology: './assets/geology-jupiter.png',
+                  planet: 'planet-jupiter.svg',
+                  internal: 'planet-jupiter-internal.svg',
+                  geology: 'geology-jupiter.png',
                },
             },
             {
@@ -185,9 +185,9 @@ export default {
                radius: '58,232 KM',
                temperature: '-138°c',
                images: {
-                  planet: './assets/planet-saturn.svg',
-                  internal: './assets/planet-saturn-internal.svg',
-                  geology: './assets/geology-saturn.png',
+                  planet: 'planet-saturn.svg',
+                  internal: 'planet-saturn-internal.svg',
+                  geology: 'geology-saturn.png',
                },
             },
             {
@@ -213,9 +213,9 @@ export default {
                radius: '25,362 KM',
                temperature: '-195°c',
                images: {
-                  planet: './assets/planet-uranus.svg',
-                  internal: './assets/planet-uranus-internal.svg',
-                  geology: './assets/geology-uranus.png',
+                  planet: 'planet-uranus.svg',
+                  internal: 'planet-uranus-internal.svg',
+                  geology: 'geology-uranus.png',
                },
             },
             {
@@ -241,9 +241,9 @@ export default {
                radius: '24,622 KM',
                temperature: '-201°c',
                images: {
-                  planet: './assets/planet-neptune.svg',
-                  internal: './assets/planet-neptune-internal.svg',
-                  geology: './assets/geology-neptune.png',
+                  planet: 'planet-neptune.svg',
+                  internal: 'planet-neptune-internal.svg',
+                  geology: 'geology-neptune.png',
                },
             },
          ],
@@ -322,5 +322,11 @@ body {
          }
       }
    }
+}
+
+[v-cloak] {
+   opacity: 0;
+   visibility: hidden;
+   transition: 0.3s ease;
 }
 </style>

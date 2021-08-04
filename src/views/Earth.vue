@@ -1,7 +1,42 @@
 <template>
-   <div class="Earth">
-      <h1>Earth</h1>
+   <div class="planet-wrap">
+      <div class="planet-main">
+         <div class="planet-images">
+            <planetImage :planetImage="planet[2].images" />
+
+            <img
+               id="planet-geology"
+               src="../assets/geology-earth.png"
+               alt="geology"
+            />
+         </div>
+
+         <PlanetMainText :planetText="planet[2]" />
+      </div>
+      <PlanetInfo :planetInfo="planet[2]" />
    </div>
 </template>
 
-<style lang="scss" scoped></style>
+<script>
+import PlanetMainText from '@/components/PlanetMainText.vue'
+import PlanetInfo from '@/components/PlanetInfo.vue'
+import planetImage from '@/components/planetImage.vue'
+
+export default {
+   components: {
+      PlanetMainText,
+      PlanetInfo,
+      planetImage,
+   },
+   props: ['planet'],
+   methods: {
+      test(event) {
+         console.log(event)
+      },
+   },
+}
+</script>
+
+<style lang="scss" scoped>
+@import 'planet';
+</style>
