@@ -229,11 +229,11 @@ export default {
 // *****
 
 // MOBILE
-@media only screen and (min-width: 320px) {
+@media only screen and (max-width: 320px) {
 }
 
 // TABLET
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
    .planet-main {
       flex-direction: column;
    }
@@ -264,6 +264,6 @@ export default {
 }
 
 // DESKTOP
-@media only screen and (min-width: 1440px) {
+@media only screen and (max-width: 1440px) {
 }
 </style>
